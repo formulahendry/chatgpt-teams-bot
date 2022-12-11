@@ -19,7 +19,7 @@ This is a ChatGPT Teams Bot app to let you chat with ChatGPT in Microsoft Teams.
    ![ChatGPT cookies](./images/chatgpt-session-token.png)
 4. Copy the value for `__Secure-next-auth.session-token` 
 5. Store this value as `CHATGPT_SESSION_TOKEN` in Environment Variables of your machine
-6. [Optional] If you just try it in local-debug, you could set the value in [.env.teamsfx.local](.env.teamsfx.local)
+6. [Optional] If you just try it in local-debug, you could set the value in `.env.teamsfx.local` file:
     ```
     CHATGPT_SESSION_TOKEN=balabalabalabala
     ```
