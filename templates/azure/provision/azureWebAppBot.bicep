@@ -3,6 +3,7 @@ param provisionParameters object
 param userAssignedIdentityId string
 
 var resourceBaseName = provisionParameters.resourceBaseName
+var chatgptSessionToken = provisionParameters.chatgptSessionToken
 var serverfarmsName = contains(provisionParameters, 'webAppServerfarmsName') ? provisionParameters['webAppServerfarmsName'] : '${resourceBaseName}bot' // Try to read name for App Service Plan from parameters
 var webAppSKU = contains(provisionParameters, 'webAppSKU') ? provisionParameters['webAppSKU'] : 'B1' // Try to read SKU for Azure Web App from parameters
 var webAppName = contains(provisionParameters, 'webAppSitesName') ? provisionParameters['webAppSitesName'] : '${resourceBaseName}bot' // Try to read name for Azure Web App from parameters
@@ -41,6 +42,10 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
         {
           name: 'RUNNING_ON_AZURE'
           value: '1'
+        }
+        {
+          name: 'CHATGPT_SESSION_TOKEN'
+          value: chatgptSessionToken
         }
       ]
     }

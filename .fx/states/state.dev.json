@@ -5,7 +5,7 @@
         "subscriptionId": "1756abc0-3554-4341-8d6a-46674962ea19",
         "subscriptionName": "Teams Cloud - Dev Test with TTL = 3 Days",
         "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
-        "needCreateResourceGroup": true,
+        "needCreateResourceGroup": false,
         "resourceGroupName": "chatgptteamsbot-dev-rg",
         "location": "East US",
         "resourceNameSuffix": "0129e0"
