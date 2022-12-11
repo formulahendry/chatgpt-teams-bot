@@ -1,0 +1,32 @@
+{
+    "solution": {
+        "provisionSucceeded": true,
+        "teamsAppTenantId": "81133585-149c-463c-ac0b-70da965a20e1",
+        "subscriptionId": "1756abc0-3554-4341-8d6a-46674962ea19",
+        "subscriptionName": "Teams Cloud - Dev Test with TTL = 3 Days",
+        "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+        "needCreateResourceGroup": true,
+        "resourceGroupName": "chatgptteamsbot-dev-rg",
+        "location": "East US",
+        "resourceNameSuffix": "0129e0"
+    },
+    "fx-resource-appstudio": {
+        "tenantId": "81133585-149c-463c-ac0b-70da965a20e1",
+        "teamsAppId": "bc6ea9d2-37f3-4731-904d-dc02895b0a4d"
+    },
+    "fx-resource-bot": {
+        "botId": "de4f6312-db43-4867-8d86-c0329fd41c14",
+        "botPassword": "{{fx-resource-bot.botPassword}}",
+        "skuName": "B1",
+        "siteName": "chatgpttea3da3edbot",
+        "domain": "chatgpttea3da3edbot.azurewebsites.net",
+        "appServicePlanName": "chatgpttea3da3edbot",
+        "resourceId": "/subscriptions/1756abc0-3554-4341-8d6a-46674962ea19/resourceGroups/chatgptteamsbot-dev-rg/providers/Microsoft.Web/sites/chatgpttea3da3edbot",
+        "siteEndpoint": "https://chatgpttea3da3edbot.azurewebsites.net"
+    },
+    "fx-resource-identity": {
+        "identityName": "chatgpttea3da3ed",
+        "identityResourceId": "/subscriptions/1756abc0-3554-4341-8d6a-46674962ea19/resourceGroups/chatgptteamsbot-dev-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/chatgpttea3da3ed",
+        "identityClientId": "507f64e3-9639-4c75-a13f-660d2b9e63e3"
+    }
+}
