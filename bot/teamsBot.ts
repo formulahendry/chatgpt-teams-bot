@@ -3,17 +3,20 @@ import {
   CardFactory,
   TurnContext,
 } from "botbuilder";
-import rawWelcomeCard from "./adaptiveCards/welcome.json";
+import rawWelcomeCard from "./adaptiveCards/welcome.json" assert { type: "json" };
 import { AdaptiveCards } from "@microsoft/adaptivecards-tools";
 import { ChatGPTAPI } from 'chatgpt';
-import config from "./config";
+import config from "./config.js";
 
 export class TeamsBot extends TeamsActivityHandler {
 
   constructor() {
     super();
 
-    const api = new ChatGPTAPI({ sessionToken: config.chatgptSessionToken! });
+    const api = new ChatGPTAPI({
+      sessionToken: config.chatgptSessionToken,
+      clearanceToken: "TBD"
+    });
 
     this.onMessage(async (context, next) => {
       console.log("Running with Message Activity.");
@@ -26,7 +29,7 @@ export class TeamsBot extends TeamsActivityHandler {
       }
 
       const response = await api.sendMessage(txt)
-      
+
       await context.sendActivity(response);
 
       // By calling next() you ensure that the next BotHandler is run.

@@ -6,8 +6,8 @@ import * as restify from "restify";
 import { BotFrameworkAdapter, TurnContext } from "botbuilder";
 
 // This bot's main dialog.
-import { TeamsBot } from "./teamsBot";
-import config from "./config";
+import { TeamsBot } from "./teamsBot.js";
+import config from "./config.js";
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
