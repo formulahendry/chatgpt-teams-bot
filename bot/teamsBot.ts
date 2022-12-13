@@ -15,7 +15,8 @@ export class TeamsBot extends TeamsActivityHandler {
 
     const api = new ChatGPTAPI({
       sessionToken: config.chatgptSessionToken,
-      clearanceToken: "TBD"
+      clearanceToken: config.clearanceToken,
+      userAgent: config.userAgent,
     });
 
     this.onMessage(async (context, next) => {
