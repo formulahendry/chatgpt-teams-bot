@@ -1,5 +1,5 @@
 // Import required packages
-import * as restify from "restify";
+import express from "express";
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
@@ -43,9 +43,10 @@ adapter.onTurnError = onTurnErrorHandler;
 const bot = new TeamsBot();
 
 // Create HTTP server.
-const server = restify.createServer();
+const server = express();
+
 server.listen(process.env.port || process.env.PORT || 3978, () => {
-  console.log(`\nBot Started, ${server.name} listening to ${server.url}`);
+  console.log(`\nBot Started, ${server.name} listening.`);
 });
 
 // Listen for incoming requests.
