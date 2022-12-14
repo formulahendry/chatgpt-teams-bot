@@ -7,7 +7,7 @@ This is a ChatGPT Teams Bot app to let you chat with ChatGPT in Microsoft Teams.
 ## Prerequisites
 
 - A ChatGPT account
-- [NodeJS](https://nodejs.org/en/)
+- [NodeJS](https://nodejs.org/en/) (**version>=18**) (Tested on Node.js 18.12.1)
 - An M365 account. If you do not have M365 account, apply one from [M365 developer program](https://developer.microsoft.com/en-us/microsoft-365/dev-program)
 - [Teams Toolkit Visual Studio Code Extension](https://aka.ms/teams-toolkit) version after 1.55 or [TeamsFx CLI](https://aka.ms/teamsfx-cli)
 

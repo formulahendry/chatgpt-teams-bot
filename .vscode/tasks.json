@@ -114,7 +114,7 @@
                 "background": {
                     "activeOnStart": true,
                     "beginsPattern": "[nodemon] starting",
-                    "endsPattern": "restify listening to|Bot/ME service listening at|[nodemon] app crashed"
+                    "endsPattern": "express server is runnning|Bot/ME service listening at|[nodemon] app crashed"
                 }
             }
         }

@@ -46,7 +46,7 @@ const bot = new TeamsBot();
 const server = express();
 
 server.listen(process.env.port || process.env.PORT || 3978, () => {
-  console.log(`\nBot Started, ${server.name} listening.`);
+  console.log(`\nBot Started, express server is runnning.`);
 });
 
 // Listen for incoming requests.
