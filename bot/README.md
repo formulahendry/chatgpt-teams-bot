@@ -7,80 +7,45 @@ This is a ChatGPT Teams Bot app to let you chat with ChatGPT in Microsoft Teams.
 ## Prerequisites
 
 - A ChatGPT account
-- [NodeJS](https://nodejs.org/en/) (**version>=18**) (Tested on Node.js 18.12.1)
+- [NodeJS](https://nodejs.org/en/) (**version >= 18**) (Tested on Node.js 18.12.1)
 - An M365 account. If you do not have M365 account, apply one from [M365 developer program](https://developer.microsoft.com/en-us/microsoft-365/dev-program)
-- [Teams Toolkit Visual Studio Code Extension](https://aka.ms/teams-toolkit) version after 1.55 or [TeamsFx CLI](https://aka.ms/teamsfx-cli)
+- Latest stable version of [Teams Toolkit Visual Studio Code Extension](https://aka.ms/teams-toolkit) (Tested on version 4.1.3)
 
-## Set up ChatGPT Session Token
+## Set up ChatGPT token
+
+On December 11, 2022, OpenAI added some additional Cloudflare protections which make it more difficult to access the unofficial API.
+
+You'll need a valid OpenAI "session token" and Cloudflare "clearance token" in order to use the API.
 
 1. Go to https://chat.openai.com/chat and log in or sign up.
-2. Open dev tools.
-3. Open `Application` > `Cookies`.
+1. Open dev tools.
+1. Open `Application` > `Cookies`.
    ![ChatGPT cookies](./images/chatgpt-session-token.png)
-4. Copy the value for `__Secure-next-auth.session-token` 
-5. Store this value as `CHATGPT_SESSION_TOKEN` in Environment Variables of your machine
-6. [Optional] If you just try it in local-debug, you could set the value in `.env.teamsfx.local` file:
+1. Copy the value for `__Secure-next-auth.session-token`. This will be your `CHATGPT_SESSION_TOKEN`.
+1. Copy the value for `cf_clearance`. This will be your `CLEARANCE_TOKEN`.
+1. Copy the value of the `user-agent` header from any request in your `Network` tab. (Or type `navigator.userAgent` in Console of your dev tools) This will be your `USER_AGENT`.
+1. Create a `.env.teamsfx.local` file under `bot` folder, and set the above value in `.env.teamsfx.local` file:
     ```
-    CHATGPT_SESSION_TOKEN=balabalabalabala
+    CHATGPT_SESSION_TOKEN=xxxxxxxxxx
+    CLEARANCE_TOKEN=xxxxxxxxxx
+    USER_AGENT=xxxxxxxxxx
     ```
-
 
 ## Debug
 
 - From Visual Studio Code: Start debugging the project by hitting the `F5` key in Visual Studio Code. 
 - Alternatively use the `Run and Debug Activity Panel` in Visual Studio Code and click the `Run and Debug` green arrow button.
-- From TeamsFx CLI: Start debugging the project by executing the command `teamsfx preview --local` in your project directory.
 
-## Edit the manifest
+## Restrictions
 
-You can find the Teams app manifest in `templates/appPackage` folder. The folder contains one manifest file:
-* `manifest.template.json`: Manifest file for Teams app running locally or running remotely (After deployed to Azure).
+**Please read carefully**
 
-This file contains template arguments with `{...}` statements which will be replaced at build time. You may add any extra properties or permissions you require to this file. See the [schema reference](https://docs.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema) for more information.
-
-## Deploy to Azure
-
-Deploy your project to Azure by following these steps:
-
-| From Visual Studio Code                                                                                                                                                                                                                                                                                                                                                  | From TeamsFx CLI                                                                                                                                                                                                                    |
-| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <ul><li>Open Teams Toolkit, and sign into Azure by clicking the `Sign in to Azure` under the `ACCOUNTS` section from sidebar.</li> <li>After you signed in, select a subscription under your account.</li><li>Open the Teams Toolkit and click `Provision in the cloud` from DEPLOYMENT section or open the command palette and select: `Teams: Provision in the cloud`.</li><li>Open the Teams Toolkit and click `Deploy to the cloud` or open the command palette and select: `Teams: Deploy to the cloud`.</li></ul> | <ul> <li>Run command `teamsfx account login azure`.</li> <li>Run command `teamsfx account set --subscription <your-subscription-id>`.</li> <li> Run command `teamsfx provision`.</li> <li>Run command: `teamsfx deploy`. </li></ul> |
-
-> Note: Provisioning and deployment may incur charges to your Azure Subscription.
-
-## Preview
-
-Once the provisioning and deployment steps are finished, you can preview your app:
-
-- From Visual Studio Code
-
-  1. Open the `Run and Debug Activity Panel`.
-  1. Select `Launch Remote (Edge)` or `Launch Remote (Chrome)` from the launch configuration drop-down.
-  1. Press the Play (green arrow) button to launch your app - now running remotely from Azure.
-
-- From TeamsFx CLI: execute `teamsfx preview --remote` in your project directory to launch your application.
-
-## Validate manifest file
-
-To check that your manifest file is valid:
-
-- From Visual Studio Code: open the command palette and select: `Teams: Validate manifest file`.
-- From TeamsFx CLI: run command `teamsfx validate` in your project directory.
-
-## Package
-
-- From Visual Studio Code: open the Teams Toolkit and click `Zip Teams metadata package` or open the command palette and select `Teams: Zip Teams metadata package`.
-- Alternatively, from the command line run `teamsfx package` in the project directory.
-
-## Publish to Teams
-
-Once deployed, you may want to distribute your application to your organization's internal app store in Teams. Your app will be submitted for admin approval.
-
-- From Visual Studio Code: open the Teams Toolkit and click `Publish to Teams` or open the command palette and select: `Teams: Publish to Teams`.
-- From TeamsFx CLI: run command `teamsfx publish` in your project directory.
+- You must use `node >= 18` at the moment. I'm using `v18.12.1` in my testing.
+- Cloudflare `cf_clearance` **tokens expire after 2 hours**, so right now we recommend that you refresh your `cf_clearance` token every hour or so.
+- Your `user-agent` and `IP address` **must match** from the real browser window you're logged in with to the one you're using for `ChatGPTAPI`.
+  - This means that only local-debug is supported for now. You currently can't log in with your laptop and then run the bot on a server or proxy somewhere.
+- You should not be using this account while the bot is using it, because that browser window may refresh one of your tokens and invalidate the bot's session.
 
 ## Further reading
 
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Bot Framework Documentation](https://docs.botframework.com/)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [chatgpt-api Node SDK](https://github.com/transitive-bullshit/chatgpt-api): it is a 3rd-party ChatGPT npm used in this Teams bot. 
