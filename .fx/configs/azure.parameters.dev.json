@@ -6,8 +6,8 @@
       "value": {
         "botAadAppClientId": "{{state.teams-bot.botId}}",
         "botAadAppClientSecret": "{{state.teams-bot.botPassword}}",
-        "chatgptSessionToken": "{{$env.CHATGPT_SESSION_TOKEN}}",
-        "resourceBaseName": "chatgpttea3da3ed"
+        "openaiApiKey": "{{$env.OPENAI_API_KEY}}",
+        "resourceBaseName": "chatgptbot{{state.solution.resourceNameSuffix}}"
       }
     }
   }
