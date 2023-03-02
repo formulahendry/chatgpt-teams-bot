@@ -14,10 +14,10 @@ export class TeamsBot extends TeamsActivityHandler {
     super();
 
     const api = new ChatGPTAPI({
-      sessionToken: config.chatgptSessionToken,
-      clearanceToken: config.clearanceToken,
-      userAgent: config.userAgent,
+      apiKey: config.openaiApiKey,
     });
+
+    let parentMessageId;
 
     this.onMessage(async (context, next) => {
       console.log("Running with Message Activity.");
@@ -29,9 +29,13 @@ export class TeamsBot extends TeamsActivityHandler {
         txt = removedMentionText.toLowerCase().replace(/\n|\r/g, "").trim();
       }
 
-      const response = await api.sendMessage(txt)
+      const response = await api.sendMessage(txt, {
+        parentMessageId
+      });
 
-      await context.sendActivity(response);
+      parentMessageId = response.id;
+
+      await context.sendActivity(response.text);
 
       // By calling next() you ensure that the next BotHandler is run.
       await next();
