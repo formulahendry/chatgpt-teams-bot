@@ -2,7 +2,7 @@
 
 This is a ChatGPT Teams Bot app to let you chat with ChatGPT in Microsoft Teams.
 
-You could also try the [OpenAI Teams Bot app](https://github.com/formulahendry/openai-teams-bot) which uses GPT-3 model.
+You could also try the [ChatGPT WeChat Bot](https://github.com/formulahendry/chatgpt-wechat-bot).
 
 ![ChatGPT](./images/chatgpt-chat.png)
 
